@@ -1,0 +1,47 @@
+namespace: ns
+replicaCount: 1
+image:
+  repository: busybox
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 80
+ingress:
+  enabled: true
+  className: alb
+  controller: ingress.k8s.aws/alb
+  annotations: 
+    alb.ingress.kubernetes.io/scheme: internet-facing
+  hosts:
+    - host: example.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - hosts:
+        - example.com
+      secretName: example-tls
+resources: {}
+hpa:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+persistence:
+  enabled: true
+  accessMode: ReadWriteMany
+  size: 6Ki
+secret:
+  name: example-secret
+  data:
+    USER: "admin"
+    PASSWORD: "password"
+configmap:
+  name: example-config
+  data:
+    config.yaml: |
+      key: value
+efs:
+  enabled: true
+  fileSystemId: fs-07c28609a44b46c9a

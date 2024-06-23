@@ -4,12 +4,12 @@ kind: StorageClass
 metadata:
   name: efs-sc
 provisioner: efs.csi.aws.com
-parameters:
-  provisioningMode: efs-ap
-  fileSystemId: {{ .Values.efs.fileSystemId }}
-  directoryPerms: "700"
-  gidRangeStart: "1000"
-  gidRangeEnd: "2000"
-  basePath: "/dynamic_provisioning"
-mountOptions:
-  - nfsvers=4.1
+# parameters:
+#   provisioningMode: efs-ap
+#   fileSystemId: {{ .Values.efs.fileSystemId }}
+#   directoryPerms: "700"
+#   gidRangeStart: "1000"
+#   gidRangeEnd: "2000"
+#   basePath: "/dynamic_provisioning"
+# mountOptions:
+#   - nfsvers=4.1

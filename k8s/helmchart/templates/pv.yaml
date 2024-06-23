@@ -4,13 +4,13 @@ metadata:
   name: efs-pv
 spec:
   capacity:
-    storage: "{{ .Values.persistence.size }}"
+  storage: "{{ .Values.persistence.size }}"
   volumeMode: Filesystem
   accessModes:
     - "{{ .Values.persistence.accessMode }}"
   persistentVolumeReclaimPolicy: Retain
+  storageClassName: efs-sc
   csi:
     driver: efs.csi.aws.com
     volumeHandle: "{{ .Values.efs.fileSystemId }}"
-  mountOptions:
-    - nfsvers=4.1  
+  
